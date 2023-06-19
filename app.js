@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 require('dotenv').config();
 var session = require('express-session');
 
@@ -24,12 +25,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: '12345526372439',
+  secret: '12w45qe1qe4q1eq54eq5',
   resave: false,
   saveUninitialized: true
 }));
 
-var secured = async (req, res, next) => {
+secured = async (req, res, next) => {
   try {
     console.log(req.session.id_usuario);
     if (req.session.id_usuario) {
@@ -45,7 +46,7 @@ var secured = async (req, res, next) => {
 app.use('/',indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin/login', loginRouter);
-app.use('/admin/novedades', secured, adminRouter);
+app.use('/admin/novedades',adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -64,3 +65,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
